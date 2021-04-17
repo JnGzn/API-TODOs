@@ -115,6 +115,29 @@ class ServiceTodo {
             }
         });
     }
+    /**
+     * Elmina el todo enviado, es importante tener el Id del todo
+     * @param {number} id: id del todo a Eliminar
+     * @returns ID del todo eliminado
+     */
+    deleteTodo(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // peticion a jsonplaceholder
+                const responseData = yield axios_1.default.delete(`${this.enlaceBase}/${id}`);
+                console.log(responseData);
+                // respuesta de la peticion
+                if (!responseData) {
+                    return -1;
+                }
+                return id;
+            }
+            catch (error) {
+                console.error(`Error en la petición: ${error}`);
+                throw new Error('Error en el servidor');
+            }
+        });
+    }
 }
 exports.ServiceTodo = ServiceTodo;
 //# sourceMappingURL=todo.service.js.map

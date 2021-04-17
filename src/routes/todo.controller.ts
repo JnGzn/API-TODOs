@@ -62,7 +62,7 @@ export  class ControllerTodo {
 
         // EndPoint POST
         // guarda el todo y lo retorna
-        app.post('/todos', async (req : express.Request, res: express.Response) => {
+        app.post('/todo', async (req : express.Request, res: express.Response) => {
 
             const data = req.body;
 
@@ -117,7 +117,27 @@ export  class ControllerTodo {
         // EndPoint Delete
         // elmiina el todo y lo retorna el id
         app.delete('/todo', async (req : express.Request, res: express.Response) => {
-            //
+            const data = req.body;
+
+            try {
+
+                // instancia del servicio
+                const todoService = new ServiceTodo()
+
+                const result = await todoService.deleteTodo(data.id)
+                // Responde y finaliza la peticion
+                res.status(200).json({
+                    data: result,
+                }).end()
+
+            } catch (error) {
+                console.log(error   )
+                // Responde y finaliza la peticion
+                res.status(500).json({
+                    data: null,
+                    err: error
+                }).end()
+            }
         })
 
     }

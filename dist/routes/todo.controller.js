@@ -56,7 +56,7 @@ class ControllerTodo {
         }));
         // EndPoint POST
         // guarda el todo y lo retorna
-        app.post('/todos', (req, res) => __awaiter(this, void 0, void 0, function* () {
+        app.post('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
             const data = req.body;
             try {
                 // instancia del servicio
@@ -101,7 +101,24 @@ class ControllerTodo {
         // EndPoint Delete
         // elmiina el todo y lo retorna el id
         app.delete('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            //
+            const data = req.body;
+            try {
+                // instancia del servicio
+                const todoService = new todo_service_1.ServiceTodo();
+                const result = yield todoService.deleteTodo(data.id);
+                // Responde y finaliza la peticion
+                res.status(200).json({
+                    data: result,
+                }).end();
+            }
+            catch (error) {
+                console.log(error);
+                // Responde y finaliza la peticion
+                res.status(500).json({
+                    data: null,
+                    err: error
+                }).end();
+            }
         }));
     }
 }
