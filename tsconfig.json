@@ -15,5 +15,5 @@
         "strict": true
 
     }, 
-    "include": ["src/**/*.ts"]
+    "include": ["src/**/*.ts", "src/test/todo.test.ts"]
 }
