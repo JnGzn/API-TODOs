@@ -13,7 +13,26 @@ export  class ControllerTodo {
         // EndPoint GET
         // obtiene el todo por Id y lo retorna
         app.get('/todo', async (req : express.Request, res: express.Response) => {
-           //
+
+        const data: any = req.query;
+        try {
+            // instancia del servicio
+            const todoService = new ServiceTodo()
+
+            const todo = await todoService.getTodoById(data.id)
+            // Responde y funaliza la peticion
+            res.status(200).json({
+                data: todo,
+            }).end()
+
+        } catch (error) {
+
+            // Responde y funaliza la peticion
+            res.status(404).json({
+                data: null,
+                err: error
+            }).end()
+        }
         })
 
         // EndPoint GET

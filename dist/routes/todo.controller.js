@@ -16,7 +16,23 @@ class ControllerTodo {
         // EndPoint GET
         // obtiene el todo por Id y lo retorna
         app.get('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            //
+            const data = req.query;
+            try {
+                // instancia del servicio
+                const todoService = new todo_service_1.ServiceTodo();
+                const todo = yield todoService.getTodoById(data.id);
+                // Responde y funaliza la peticion
+                res.status(200).json({
+                    data: todo,
+                }).end();
+            }
+            catch (error) {
+                // Responde y funaliza la peticion
+                res.status(404).json({
+                    data: null,
+                    err: error
+                }).end();
+            }
         }));
         // EndPoint GET
         // obtiene el listado de todos y los retorna
