@@ -62,8 +62,30 @@ export  class ControllerTodo {
 
         // EndPoint POST
         // guarda el todo y lo retorna
-        app.post('/todo', async (req : express.Request, res: express.Response) => {
-            //
+        app.post('/todos', async (req : express.Request, res: express.Response) => {
+
+            const data = req.body;
+
+
+            try {
+
+                // instancia del servicio
+                const todoService = new ServiceTodo()
+
+                const result = await todoService.postTodo(data)
+                // Responde y funaliza la peticion
+                res.status(201).json({
+                    data: result,
+                }).end()
+
+            } catch (error) {
+                console.log(error   )
+                // Responde y funaliza la peticion
+                res.status(500).json({
+                    data: null,
+                    err: error
+                }).end()
+            }
         })
 
         // EndPoint PUT

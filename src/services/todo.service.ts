@@ -65,5 +65,27 @@ export  class ServiceTodo {
 
     }
 
+    async postTodo(todo: Todo) :Promise<Todo> {
+
+        const todoEnvio = {...todo}
+        console.log(todoEnvio)
+        try {
+            // peticion a jsonplaceholder
+            const responseData: AxiosResponse = await axios.post(`${this.enlaceBase}`, JSON.stringify(todoEnvio));
+            // respuesta de la peticion
+            if(!responseData){
+                return {}
+            }
+
+            todoEnvio.id = responseData.data.id
+            return todoEnvio;
+
+        } catch (error) {
+            console.error(`Error en la petición: ${error}`);
+            throw new Error('Error en el servidor')
+        }
+
+    }
+
 
 }

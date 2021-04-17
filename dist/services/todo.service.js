@@ -65,6 +65,26 @@ class ServiceTodo {
             }
         });
     }
+    postTodo(todo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const todoEnvio = Object.assign({}, todo);
+            console.log(todoEnvio);
+            try {
+                // peticion a jsonplaceholder
+                const responseData = yield axios_1.default.post(`${this.enlaceBase}`, JSON.stringify(todoEnvio));
+                // respuesta de la peticion
+                if (!responseData) {
+                    return {};
+                }
+                todoEnvio.id = responseData.data.id;
+                return todoEnvio;
+            }
+            catch (error) {
+                console.error(`Error en la petición: ${error}`);
+                throw new Error('Error en el servidor');
+            }
+        });
+    }
 }
 exports.ServiceTodo = ServiceTodo;
 //# sourceMappingURL=todo.service.js.map

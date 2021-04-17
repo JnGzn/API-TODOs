@@ -56,8 +56,25 @@ class ControllerTodo {
         }));
         // EndPoint POST
         // guarda el todo y lo retorna
-        app.post('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            //
+        app.post('/todos', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const data = req.body;
+            try {
+                // instancia del servicio
+                const todoService = new todo_service_1.ServiceTodo();
+                const result = yield todoService.postTodo(data);
+                // Responde y funaliza la peticion
+                res.status(201).json({
+                    data: result,
+                }).end();
+            }
+            catch (error) {
+                console.log(error);
+                // Responde y funaliza la peticion
+                res.status(500).json({
+                    data: null,
+                    err: error
+                }).end();
+            }
         }));
         // EndPoint PUT
         // modifa el todo y lo retorna modificado
