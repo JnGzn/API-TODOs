@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ControllerTodo = void 0;
+const todo_service_1 = require("../services/todo.service");
 class ControllerTodo {
     routes(app) {
         // EndPoint GET
@@ -20,7 +21,22 @@ class ControllerTodo {
         // EndPoint GET
         // obtiene el listado de todos y los retorna
         app.get('/todos', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            //
+            try {
+                // instancia del servicio
+                const todoService = new todo_service_1.ServiceTodo();
+                const result = yield todoService.getListTodos();
+                // Responde y funaliza la peticion
+                res.status(200).json({
+                    data: result,
+                }).end();
+            }
+            catch (error) {
+                // Responde y funaliza la peticion
+                res.status(500).json({
+                    data: null,
+                    err: error
+                }).end();
+            }
         }));
         // EndPoint POST
         // guarda el todo y lo retorna
