@@ -65,6 +65,11 @@ export  class ServiceTodo {
 
     }
 
+    /**
+     * Guarda el todo enviado.
+     * @param {todo} todo: todo a guardar
+     * @returns todo guardado
+     */
     async postTodo(todo: Todo) :Promise<Todo> {
 
         const todoEnvio = {...todo}
@@ -87,5 +92,31 @@ export  class ServiceTodo {
 
     }
 
+    /**
+     * Modifica el todo enviado, es importante tener el Id del todo
+     * @param {todo} todo:  todo a modificar
+     * @returns todo modificado
+     */
+    async putTodo(todo: Todo) :Promise<Todo> {
+
+        const todoEnvio = {...todo}
+        // delete todo.id
+        console.log(todoEnvio)
+        try {
+            // peticion a jsonplaceholder
+            const responseData: AxiosResponse = await axios.put(`${this.enlaceBase}/${todo.id}`, JSON.stringify(todoEnvio));
+            // respuesta de la peticion
+            if(!responseData){
+                return {}
+            }
+
+            return todoEnvio;
+
+        } catch (error) {
+            console.error(`Error en la petición: ${error}`);
+            throw new Error('Error en el servidor')
+        }
+
+    }
 
 }

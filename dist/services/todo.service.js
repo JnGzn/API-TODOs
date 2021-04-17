@@ -65,6 +65,11 @@ class ServiceTodo {
             }
         });
     }
+    /**
+     * Guarda el todo enviado.
+     * @param {todo} todo: todo a guardar
+     * @returns todo guardado
+     */
     postTodo(todo) {
         return __awaiter(this, void 0, void 0, function* () {
             const todoEnvio = Object.assign({}, todo);
@@ -77,6 +82,31 @@ class ServiceTodo {
                     return {};
                 }
                 todoEnvio.id = responseData.data.id;
+                return todoEnvio;
+            }
+            catch (error) {
+                console.error(`Error en la petición: ${error}`);
+                throw new Error('Error en el servidor');
+            }
+        });
+    }
+    /**
+     * Modifica el todo enviado, es importante tener el Id del todo
+     * @param {todo} todo:  todo a modificar
+     * @returns todo modificado
+     */
+    putTodo(todo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const todoEnvio = Object.assign({}, todo);
+            // delete todo.id
+            console.log(todoEnvio);
+            try {
+                // peticion a jsonplaceholder
+                const responseData = yield axios_1.default.put(`${this.enlaceBase}/${todo.id}`, JSON.stringify(todoEnvio));
+                // respuesta de la peticion
+                if (!responseData) {
+                    return {};
+                }
                 return todoEnvio;
             }
             catch (error) {

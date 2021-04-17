@@ -79,7 +79,24 @@ class ControllerTodo {
         // EndPoint PUT
         // modifa el todo y lo retorna modificado
         app.put('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
-            //
+            const data = req.body;
+            try {
+                // instancia del servicio
+                const todoService = new todo_service_1.ServiceTodo();
+                const result = yield todoService.putTodo(data);
+                // Responde y funaliza la peticion
+                res.status(200).json({
+                    data: result,
+                }).end();
+            }
+            catch (error) {
+                console.log(error);
+                // Responde y funaliza la peticion
+                res.status(500).json({
+                    data: null,
+                    err: error
+                }).end();
+            }
         }));
         // EndPoint Delete
         // elmiina el todo y lo retorna el id
