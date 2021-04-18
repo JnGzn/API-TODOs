@@ -1,8 +1,10 @@
 // importacion librerias
 import express from 'express'
-import { ServiceTodo } from "../services/todo.service";
+import { DeleteTodo } from "../services/DELETE/deleteTodo.service";
 import { schemaTodoDelete, schemaTodoGet, schemaTodoPost, schemaTodoPut } from './../validators/todo.validator';
-import joi, { ValidationError } from 'joi';
+import { GetTodo } from '../services/GET/getTodo.service';
+import { PostTodo } from '../services/POST/postTodo.service';
+import { PutTodo } from '../services/PUT/putTodo.service';
 
 
 
@@ -32,7 +34,7 @@ export  class ControllerTodo {
 
         try {
             // instancia del servicio
-            const todoService = new ServiceTodo()
+            const todoService = new GetTodo()
 
             const todo = await todoService.getTodoById(data.id)
             // Responde y funaliza la peticion
@@ -58,7 +60,7 @@ export  class ControllerTodo {
             try {
 
                 // instancia del servicio
-                const todoService = new ServiceTodo()
+                const todoService = new GetTodo()
 
                 const result = await todoService.getListTodos()
                 // Responde y funaliza la peticion
@@ -97,7 +99,7 @@ export  class ControllerTodo {
             try {
 
                 // instancia del servicio
-                const todoService = new ServiceTodo()
+                const todoService = new PostTodo()
 
                 const result = await todoService.postTodo(data)
                 // Responde y funaliza la peticion
@@ -136,7 +138,7 @@ export  class ControllerTodo {
             try {
 
                 // instancia del servicio
-                const todoService = new ServiceTodo()
+                const todoService = new PutTodo()
 
                 const result = await todoService.putTodo(data)
                 // Responde y funaliza la peticion
@@ -175,7 +177,7 @@ export  class ControllerTodo {
             try {
 
                 // instancia del servicio
-                const todoService = new ServiceTodo()
+                const todoService = new DeleteTodo()
 
                 const result = await todoService.deleteTodo(data.id)
                 // Responde y finaliza la peticion

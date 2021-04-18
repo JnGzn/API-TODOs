@@ -10,8 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ControllerTodo = void 0;
-const todo_service_1 = require("../services/todo.service");
+const deleteTodo_service_1 = require("../services/DELETE/deleteTodo.service");
 const todo_validator_1 = require("./../validators/todo.validator");
+const getTodo_service_1 = require("../services/GET/getTodo.service");
+const postTodo_service_1 = require("../services/POST/postTodo.service");
+const putTodo_service_1 = require("../services/PUT/putTodo.service");
 class ControllerTodo {
     routes(app) {
         // EndPoint GET
@@ -31,7 +34,7 @@ class ControllerTodo {
             }
             try {
                 // instancia del servicio
-                const todoService = new todo_service_1.ServiceTodo();
+                const todoService = new getTodo_service_1.GetTodo();
                 const todo = yield todoService.getTodoById(data.id);
                 // Responde y funaliza la peticion
                 res.status(200).json({
@@ -51,7 +54,7 @@ class ControllerTodo {
         app.get('/todos', (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 // instancia del servicio
-                const todoService = new todo_service_1.ServiceTodo();
+                const todoService = new getTodo_service_1.GetTodo();
                 const result = yield todoService.getListTodos();
                 // Responde y funaliza la peticion
                 res.status(200).json({
@@ -83,7 +86,7 @@ class ControllerTodo {
             }
             try {
                 // instancia del servicio
-                const todoService = new todo_service_1.ServiceTodo();
+                const todoService = new postTodo_service_1.PostTodo();
                 const result = yield todoService.postTodo(data);
                 // Responde y funaliza la peticion
                 res.status(201).json({
@@ -116,7 +119,7 @@ class ControllerTodo {
             }
             try {
                 // instancia del servicio
-                const todoService = new todo_service_1.ServiceTodo();
+                const todoService = new putTodo_service_1.PutTodo();
                 const result = yield todoService.putTodo(data);
                 // Responde y funaliza la peticion
                 res.status(200).json({
@@ -149,7 +152,7 @@ class ControllerTodo {
             }
             try {
                 // instancia del servicio
-                const todoService = new todo_service_1.ServiceTodo();
+                const todoService = new deleteTodo_service_1.DeleteTodo();
                 const result = yield todoService.deleteTodo(data.id);
                 // Responde y finaliza la peticion
                 res.status(200).json({
