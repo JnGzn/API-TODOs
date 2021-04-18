@@ -11,19 +11,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ControllerTodo = void 0;
 const todo_service_1 = require("../services/todo.service");
+const todo_validator_1 = require("./../validators/todo.validator");
 class ControllerTodo {
     routes(app) {
         // EndPoint GET
         // obtiene el todo por Id y lo retorna
         app.get('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            // validacion datos
             const data = req.query;
+            const validation = todo_validator_1.schemaTodoGet.validate(data);
+            // Si hay error en la validacion
+            if (validation.error) {
+                // Responde y funaliza la peticion
+                res.status(422).json({
+                    data: null,
+                    err: validation.error.message
+                }).end();
+                return;
+            }
             try {
                 // instancia del servicio
                 const todoService = new todo_service_1.ServiceTodo();
                 const todo = yield todoService.getTodoById(data.id);
                 // Responde y funaliza la peticion
                 res.status(200).json({
-                    data: todo,
+                    data: todo
                 }).end();
             }
             catch (error) {
@@ -57,7 +69,18 @@ class ControllerTodo {
         // EndPoint POST
         // guarda el todo y lo retorna
         app.post('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            // validacion datos
             const data = req.body;
+            const validation = todo_validator_1.schemaTodoPost.validate(data);
+            // Si hay error en la validacion
+            if (validation.error) {
+                // Responde y funaliza la peticion
+                res.status(422).json({
+                    data: null,
+                    err: validation.error.message
+                }).end();
+                return;
+            }
             try {
                 // instancia del servicio
                 const todoService = new todo_service_1.ServiceTodo();
@@ -79,7 +102,18 @@ class ControllerTodo {
         // EndPoint PUT
         // modifa el todo y lo retorna modificado
         app.put('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            // validacion datos
             const data = req.body;
+            const validation = todo_validator_1.schemaTodoPut.validate(data);
+            // Si hay error en la validacion
+            if (validation.error) {
+                // Responde y funaliza la peticion
+                res.status(422).json({
+                    data: null,
+                    err: validation.error.message
+                }).end();
+                return;
+            }
             try {
                 // instancia del servicio
                 const todoService = new todo_service_1.ServiceTodo();
@@ -101,7 +135,18 @@ class ControllerTodo {
         // EndPoint Delete
         // elmiina el todo y lo retorna el id
         app.delete('/todo', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            // validacion datos
             const data = req.body;
+            const validation = todo_validator_1.schemaTodoDelete.validate(data);
+            // Si hay error en la validacion
+            if (validation.error) {
+                // Responde y funaliza la peticion
+                res.status(422).json({
+                    data: null,
+                    err: validation.error.message
+                }).end();
+                return;
+            }
             try {
                 // instancia del servicio
                 const todoService = new todo_service_1.ServiceTodo();

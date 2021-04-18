@@ -4,19 +4,10 @@ import { Todo } from '../interfaces/todo.interface';
 
 export  class ServiceTodo {
 
-    // atributos Clase ServiceTodo
-    private userId: number;
-    private id: number;
-    private title: string;
-    private completed: boolean;
     private enlaceBase: string;
 
     // Constructor Clase ServiceTodo
     constructor(){
-        this.id = -1
-        this.userId = -1
-        this.title = ''
-        this.completed = false
         this.enlaceBase = 'https://jsonplaceholder.typicode.com/todos'
     }
 
@@ -73,6 +64,10 @@ export  class ServiceTodo {
     async postTodo(todo: Todo) :Promise<Todo> {
 
         const todoEnvio = {...todo}
+
+        if(!todoEnvio.completed){
+            todoEnvio.completed = false
+        }
         console.log(todoEnvio)
         try {
             // peticion a jsonplaceholder
@@ -124,7 +119,7 @@ export  class ServiceTodo {
      * @param {number} id: id del todo a Eliminar
      * @returns ID del todo eliminado
      */
-     async deleteTodo(id: number) :Promise<number> {
+     async deleteTodo(id: number) :Promise<Todo> {
 
 
         try {
@@ -133,10 +128,10 @@ export  class ServiceTodo {
             console.log(responseData)
             // respuesta de la peticion
             if(!responseData){
-                return -1
+                return {}
             }
 
-            return id;
+            return {id};
 
         } catch (error) {
             console.error(`Error en la petición: ${error}`);

@@ -11,17 +11,16 @@ exports.schemaTodoGet = joi_1.default.object().keys({
 });
 // define esquema todo Post
 exports.schemaTodoPost = joi_1.default.object().keys({
-    id: joi_1.default.number().required(),
     userId: joi_1.default.number().required(),
     title: joi_1.default.string().required(),
-    completed: joi_1.default.boolean()
+    completed: joi_1.default.boolean().default(false)
 });
 // define esquema todo Put
 exports.schemaTodoPut = joi_1.default.object().keys({
     id: joi_1.default.number().required(),
     userId: joi_1.default.number().required(),
     title: joi_1.default.string().required(),
-    completed: joi_1.default.boolean()
+    completed: joi_1.default.boolean().required()
 });
 // define esquema todo Delete
 exports.schemaTodoDelete = joi_1.default.object().keys({

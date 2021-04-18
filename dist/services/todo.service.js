@@ -17,10 +17,6 @@ const axios_1 = __importDefault(require("axios"));
 class ServiceTodo {
     // Constructor Clase ServiceTodo
     constructor() {
-        this.id = -1;
-        this.userId = -1;
-        this.title = '';
-        this.completed = false;
         this.enlaceBase = 'https://jsonplaceholder.typicode.com/todos';
     }
     /**
@@ -73,6 +69,9 @@ class ServiceTodo {
     postTodo(todo) {
         return __awaiter(this, void 0, void 0, function* () {
             const todoEnvio = Object.assign({}, todo);
+            if (!todoEnvio.completed) {
+                todoEnvio.completed = false;
+            }
             console.log(todoEnvio);
             try {
                 // peticion a jsonplaceholder
@@ -128,9 +127,9 @@ class ServiceTodo {
                 console.log(responseData);
                 // respuesta de la peticion
                 if (!responseData) {
-                    return -1;
+                    return {};
                 }
-                return id;
+                return { id };
             }
             catch (error) {
                 console.error(`Error en la petición: ${error}`);

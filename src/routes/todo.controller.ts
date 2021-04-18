@@ -1,7 +1,9 @@
 // importacion librerias
 import express from 'express'
-import axios from "axios";
 import { ServiceTodo } from "../services/todo.service";
+import { schemaTodoDelete, schemaTodoGet, schemaTodoPost, schemaTodoPut } from './../validators/todo.validator';
+import joi, { ValidationError } from 'joi';
+
 
 
 export  class ControllerTodo {
@@ -14,7 +16,20 @@ export  class ControllerTodo {
         // obtiene el todo por Id y lo retorna
         app.get('/todo', async (req : express.Request, res: express.Response) => {
 
+        // validacion datos
         const data: any = req.query;
+        const validation = schemaTodoGet.validate(data)
+
+        // Si hay error en la validacion
+        if(validation.error){
+            // Responde y funaliza la peticion
+            res.status(422).json({
+                data: null,
+                err: validation.error.message
+            }).end()
+            return
+        }
+
         try {
             // instancia del servicio
             const todoService = new ServiceTodo()
@@ -22,7 +37,7 @@ export  class ControllerTodo {
             const todo = await todoService.getTodoById(data.id)
             // Responde y funaliza la peticion
             res.status(200).json({
-                data: todo,
+                data: todo
             }).end()
 
         } catch (error) {
@@ -64,7 +79,19 @@ export  class ControllerTodo {
         // guarda el todo y lo retorna
         app.post('/todo', async (req : express.Request, res: express.Response) => {
 
-            const data = req.body;
+            // validacion datos
+            const data: any = req.body;
+            const validation = schemaTodoPost.validate(data)
+
+            // Si hay error en la validacion
+            if(validation.error){
+                // Responde y funaliza la peticion
+                res.status(422).json({
+                    data: null,
+                    err: validation.error.message
+                }).end()
+                return
+            }
 
 
             try {
@@ -91,7 +118,20 @@ export  class ControllerTodo {
         // EndPoint PUT
         // modifa el todo y lo retorna modificado
         app.put('/todo', async (req : express.Request, res: express.Response) => {
-            const data = req.body;
+
+            // validacion datos
+            const data: any = req.body;
+            const validation = schemaTodoPut.validate(data)
+
+            // Si hay error en la validacion
+            if(validation.error){
+                // Responde y funaliza la peticion
+                res.status(422).json({
+                    data: null,
+                    err: validation.error.message
+                }).end()
+                return
+            }
 
             try {
 
@@ -117,7 +157,20 @@ export  class ControllerTodo {
         // EndPoint Delete
         // elmiina el todo y lo retorna el id
         app.delete('/todo', async (req : express.Request, res: express.Response) => {
-            const data = req.body;
+
+            // validacion datos
+            const data: any = req.body;
+            const validation = schemaTodoDelete.validate(data)
+
+            // Si hay error en la validacion
+            if(validation.error){
+                // Responde y funaliza la peticion
+                res.status(422).json({
+                    data: null,
+                    err: validation.error.message
+                }).end()
+                return
+            }
 
             try {
 
