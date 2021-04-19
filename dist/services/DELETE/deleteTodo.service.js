@@ -26,6 +26,7 @@ class DeleteTodo extends todo_service_1.ServiceTodo {
             try {
                 // peticion a jsonplaceholder
                 const responseData = yield axios_1.default.delete(`${this.enlaceBase}/${id}`);
+                console.log(`${this.enlaceBase}/${id}`);
                 console.log(responseData);
                 // respuesta de la peticion
                 if (!responseData) {

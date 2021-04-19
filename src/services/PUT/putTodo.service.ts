@@ -14,7 +14,6 @@ export class PutTodo extends ServiceTodo{
 
         const todoEnvio = {...todo}
         // delete todo.id
-        console.log(todoEnvio)
         try {
             // peticion a jsonplaceholder
             const responseData: AxiosResponse = await axios.put(`${this.enlaceBase}/${todo.id}`, JSON.stringify(todoEnvio));

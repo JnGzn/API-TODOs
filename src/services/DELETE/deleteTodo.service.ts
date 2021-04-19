@@ -15,7 +15,7 @@ export class DeleteTodo extends ServiceTodo{
         try {
             // peticion a jsonplaceholder
             const responseData: AxiosResponse = await axios.delete(`${this.enlaceBase}/${id}`);
-            console.log(responseData)
+
             // respuesta de la peticion
             if(!responseData){
                 return -1
