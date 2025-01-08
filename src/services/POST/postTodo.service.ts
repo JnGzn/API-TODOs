@@ -11,7 +11,7 @@ export class PostTodo extends ServiceTodo{
     async postTodo(todo: Todo) :Promise<Todo> {
 
         const todoEnvio = {...todo}
-        
+
         try {
             // peticion a jsonplaceholder
             const responseData: AxiosResponse = await axios.post(`${this.enlaceBase}`, JSON.stringify(todoEnvio));

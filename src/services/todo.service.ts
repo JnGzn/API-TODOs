@@ -8,7 +8,7 @@ export  class ServiceTodo {
 
     // Constructor Clase ServiceTodo
     constructor(){
-        this.enlaceBase = 'https://jsonplaceholder.typicode.com/todos'
+        this.enlaceBase = 'https://jsonplaceholder.org/posts'
     }
 
     /**
