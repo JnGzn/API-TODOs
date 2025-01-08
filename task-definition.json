@@ -1,13 +1,13 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:970547346022:task-definition/deploy-todos:2",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:970547346022:task-definition/jngzn-todos-test-deploy:1",
     "containerDefinitions": [
         {
-            "name": "deploy-todos",
-            "image": "970547346022.dkr.ecr.us-east-2.amazonaws.com/deploy-todos",
+            "name": "deploy-todos-test",
+            "image": "public.ecr.aws/h5y9t3k3/deploy-todos-test",
             "cpu": 0,
             "portMappings": [
                 {
-                    "name": "deploy-todos-80-tcp",
+                    "name": "deploy-todos-test-80-tcp",
                     "containerPort": 80,
                     "hostPort": 80,
                     "protocol": "tcp",
@@ -23,7 +23,7 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/deploy-todos",
+                    "awslogs-group": "/ecs/jngzn-todos-test-deploy",
                     "mode": "non-blocking",
                     "awslogs-create-group": "true",
                     "max-buffer-size": "25m",
@@ -35,10 +35,10 @@
             "systemControls": []
         }
     ],
-    "family": "deploy-todos",
+    "family": "jngzn-todos-test-deploy",
     "executionRoleArn": "arn:aws:iam::970547346022:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 2,
+    "revision": 1,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -49,16 +49,10 @@
             "name": "ecs.capability.execution-role-awslogs"
         },
         {
-            "name": "com.amazonaws.ecs.capability.ecr-auth"
-        },
-        {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
-        },
-        {
-            "name": "ecs.capability.execution-role-ecr-pull"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
@@ -84,7 +78,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-01-08T22:17:26.810Z",
+    "registeredAt": "2025-01-08T23:14:01.629Z",
     "registeredBy": "arn:aws:iam::970547346022:root",
     "tags": []
 }
