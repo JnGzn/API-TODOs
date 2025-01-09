@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:970547346022:task-definition/task-definition-deploy-test:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:970547346022:task-definition/task-definition-deploy-test:2",
     "containerDefinitions": [
         {
-            "name": "deploy-todos-test",
-            "image": "public.ecr.aws/h5y9t3k3/deploy-todos-test",
+            "name": "test-deploy-priv",
+            "image": "970547346022.dkr.ecr.us-east-2.amazonaws.com/test-deploy-priv",
             "cpu": 0,
             "portMappings": [
                 {
@@ -38,7 +38,7 @@
     "family": "task-definition-deploy-test",
     "executionRoleArn": "arn:aws:iam::970547346022:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 1,
+    "revision": 2,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -49,10 +49,16 @@
             "name": "ecs.capability.execution-role-awslogs"
         },
         {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
@@ -77,7 +83,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-01-09T14:55:09.774Z",
+    "registeredAt": "2025-01-09T16:11:36.084Z",
     "registeredBy": "arn:aws:iam::970547346022:root",
     "tags": []
 }
