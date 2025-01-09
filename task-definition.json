@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-2:970547346022:task-definition/jngzn-todos-test-deploy:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:970547346022:task-definition/task-definition-deploy-test:1",
     "containerDefinitions": [
         {
             "name": "deploy-todos-test",
@@ -7,9 +7,9 @@
             "cpu": 0,
             "portMappings": [
                 {
-                    "name": "deploy-todos-test-80-tcp",
-                    "containerPort": 80,
-                    "hostPort": 80,
+                    "name": "deploy-todos-test-3000-tcp",
+                    "containerPort": 3000,
+                    "hostPort": 3000,
                     "protocol": "tcp",
                     "appProtocol": "http"
                 }
@@ -23,7 +23,7 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/jngzn-todos-test-deploy",
+                    "awslogs-group": "/ecs/task-definition-deploy-test",
                     "mode": "non-blocking",
                     "awslogs-create-group": "true",
                     "max-buffer-size": "25m",
@@ -35,7 +35,7 @@
             "systemControls": []
         }
     ],
-    "family": "jngzn-todos-test-deploy",
+    "family": "task-definition-deploy-test",
     "executionRoleArn": "arn:aws:iam::970547346022:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
@@ -66,19 +66,18 @@
     ],
     "placementConstraints": [],
     "compatibilities": [
-        "EC2",
-        "FARGATE"
+        "EC2"
     ],
     "requiresCompatibilities": [
         "EC2"
     ],
-    "cpu": "256",
-    "memory": "512",
+    "cpu": "1024",
+    "memory": "1024",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-01-08T23:14:01.629Z",
+    "registeredAt": "2025-01-09T14:55:09.774Z",
     "registeredBy": "arn:aws:iam::970547346022:root",
     "tags": []
 }
