@@ -33,6 +33,7 @@ on:
 env:
   AWS_REGION: us-east-2                  # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: deploy-todos-test           # set this to your Amazon ECR repository name
+  ECR_REPOSITORY_URI: public.ecr.aws/h5y9t3k3/deploy-todos-test           # set this to your Amazon ECR repository name
   ECS_SERVICE: todos-service-deploy-service-clust-zero               # set this to your Amazon ECS service name
   ECS_CLUSTER: prueba-cluster-deploy-test-zero                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: task-definition.json  # set this to the path to your Amazon ECS task definition
@@ -74,7 +75,8 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         docker build -t ${{ env.ECR_REPOSITORY }} .
-        docker push ${{ env.ECR_REPOSITORY }}:latesty
+        docker tag ${{ env.ECR_REPOSITORY }}:latest ${{ env.ECR_REPOSITORY_URI }}:latest
+        docker push ${{ env.ECR_REPOSITORY_URI }}:latest
         echo "image=${{ env.ECR_REPOSITORY }}" >> $GITHUB_OUTPUT
 
     - name: Fill in the new image ID in the Amazon ECS task definition
